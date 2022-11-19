@@ -24,6 +24,9 @@ done;
 
 ### 3. Make place order and mint NFT by CLI
 - Open script `mint_nft.sh`, then set the variable `password` to YOUR_PASSWORD
+```
+wget -O mint_nft.sh https://raw.githubusercontent.com/minhhangdo/Sei-test-node/main/NFT/gen_nft.json && chmod +x mint_nft.sh
+```
 - Run script
 ```
 chmod +x /root/spam_nft/mint_nft.sh
