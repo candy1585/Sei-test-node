@@ -4,8 +4,10 @@ cd $HOME && mkdir $HOME/spam_nft
 cd spam_nft
 wget -O mint_nft.sh https://raw.githubusercontent.com/minhhangdo/Sei-test-node/main/NFT/mint_nft.sh && chmod +x mint_nft.sh
 wget -O gen_nft.json https://raw.githubusercontent.com/minhhangdo/Sei-test-node/main/NFT/gen_nft.json && chmod +x gen_nft.json
+wget -O gen_limit_tx.json https://raw.githubusercontent.com/minhhangdo/Sei-test-node/main/NFT/gen_limit_tx.json && chmod +x gen_limit_tx.json
 
 ```
+### 1. Create wallet
 ```
 cd $HOME && mkdir $HOME/.seispam
 cp /root/go/bin/seid /root/go/bin/seispamd
@@ -15,7 +17,6 @@ seispamd config chain-id atlantic-1 --home $HOME/.seispam
 seispamd init SPAM --chain-id atlantic-1 -o --home $HOME/.seispam
 seispamd config keyring-backend test  --home $HOME/.seispam
 ```
-### 1. Create wallet
 ```
 password=YOUR_PASSWORD
 for ((i = 1; i <= 100; i++ )); do \
@@ -37,9 +38,6 @@ sleep 5; \
 echo $password | seispamd tx bank send $main_wallet_addr $i 10000usei --chain-id atlantic-1 --from $main_wallet_name --home $HOME/.seispam --node https://sei-testnet-rpc.brocha.in:443 -y ; \
 sleep 5; \
 done;
-```
-```
-sed -i "s|\"sender\": .*|\"sender\": \"$main_wallet_addr\",|" gen_nft.json
 ```
 ### 3. Make place order and mint NFT by CLI
 - Open script `mint_nft.sh`, then set the variable `password` to YOUR_PASSWORD
