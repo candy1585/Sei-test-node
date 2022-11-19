@@ -1,3 +1,9 @@
+# dowload file 
+```
+wget -O mint_nft.sh https://raw.githubusercontent.com/minhhangdo/Sei-test-node/main/NFT/mint_nft.sh && chmod +x mint_nft.sh
+wget -O gen_nft.json https://raw.githubusercontent.com/minhhangdo/Sei-test-node/main/NFT/gen_nft.json && chmod +x gen_nft.json
+
+```
 ### 1. Create wallet
 ```
 password=YOUR_PASSWORD
@@ -14,6 +20,8 @@ echo $password | seid keys list | grep address | awk '{print $2}' > $HOME/spam_n
 main_wallet_addr=YOUR_MAIN_ADDR
 main_wallet_name=YOUR_MAIN_NAME
 
+sed -i "s|\"sender\": .*|\"sender\": \"$main_wallet_addr\",|" gen_nft.json
+
 for i in `cat $HOME/spam_nft/wallet_list.txt` ; do \
 echo $password | seid tx bank send $main_wallet_addr $i 500000factory/sei1466nf3zuxpya8q9emxukd7vftaf6h4psr0a07srl5zw74zh84yjqpeheyc/uust2 --chain-id atlantic-1 --from $main_wallet_name -y ; \
 sleep 5; \
@@ -24,9 +32,6 @@ done;
 
 ### 3. Make place order and mint NFT by CLI
 - Open script `mint_nft.sh`, then set the variable `password` to YOUR_PASSWORD
-```
-wget -O mint_nft.sh https://raw.githubusercontent.com/minhhangdo/Sei-test-node/main/NFT/gen_nft.json && chmod +x mint_nft.sh
-```
 - Run script
 ```
 chmod +x /root/spam_nft/mint_nft.sh
